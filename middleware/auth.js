@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const Users = require("../schemas/users");
+const { Users } = require("../models/index");
 
 // 유저 인증에 실패하면 401 상태 코드를 반환한다.
 module.exports = (req, res, next) => {

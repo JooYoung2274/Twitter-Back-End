@@ -1,4 +1,4 @@
-const Articles = require("../schemas/articles");
+const { Articles } = require("../models/index");
 
 const createArticle = async (content, img, nickname, loginId) => {
   try {

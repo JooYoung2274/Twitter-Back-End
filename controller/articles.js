@@ -1,4 +1,4 @@
-const articlesModel = require("../model/articles");
+const articlesModel = require("../models/articles");
 
 const articlePost = async (req, res, next) => {
   try {
