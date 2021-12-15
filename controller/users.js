@@ -1,12 +1,12 @@
-const userModel = require("../models/users");
+const userModel = require("../model/users");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 //id check api
 const idcheck = async (req, res, next) => {
   try {
-    const loginId = req.body;
-    const checkId = await userModel.findDb(loginId);
+    const loginId = req.body.loginId;
+    const checkId = await userModel.findDb({ loginId });
     if (!checkId) {
       res.status(400).send({ errorMessage: "사용 가능한 아이디입니다" });
     } else {
@@ -21,8 +21,8 @@ const idcheck = async (req, res, next) => {
 //nickname check api
 const nickcheck = async (req, res, next) => {
   try {
-    const nickname = req.body;
-    const checkNick = await userModel.findDb(nickname);
+    const nickname = req.body.nickname;
+    const checkNick = await userModel.findDb({ nickname });
     if (!checkNick) {
       res.status(400).send({ errorMessage: "사용가능한 닉네임입니다" });
     } else {

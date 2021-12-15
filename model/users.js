@@ -11,7 +11,7 @@ const creatUser = async (loginId, nickname, hashedPass) => {
 };
 
 const findDb = async (id) => {
-  return Users.findOne({ where: { id } });
+  return Users.findOne({ where: id });
 };
 
 module.exports = { creatUser, findDb };

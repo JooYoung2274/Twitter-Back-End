@@ -1,12 +1,13 @@
 const { Articles } = require("../models/index");
 
-const createArticle = async (content, img, nickname, loginId) => {
+const createArticle = async (content, img, nickname, loginId, userId) => {
   try {
     const article = await Articles.create({
       content: content,
       img: img,
       nickname: nickname,
       loginId: loginId,
+      userId: userId,
     });
     return article;
   } catch (error) {
@@ -17,7 +18,8 @@ const createArticle = async (content, img, nickname, loginId) => {
 
 const findArticles = async () => {
   try {
-    const articles = await Articles.find({});
+    const articles = await Articles.findAll();
+    console.log(articles);
     return articles;
   } catch (error) {
     console.log(error);
@@ -27,7 +29,7 @@ const findArticles = async () => {
 
 const findArticle = async (input) => {
   try {
-    const article = await Articles.findOne({ _id: input });
+    const article = await Articles.findOne({ where: input });
     return article;
   } catch (error) {
     console.log(error);
@@ -37,9 +39,9 @@ const findArticle = async (input) => {
 
 const updateAriticles = async (articleId, content, img) => {
   try {
-    await Articles.updateOne(
-      { _id: articleId },
-      { $set: { content: content, img: img } }
+    await Articles.update(
+      { content: content, img: img },
+      { where: { articleId: articleId } }
     );
     return;
   } catch (error) {
@@ -50,7 +52,7 @@ const updateAriticles = async (articleId, content, img) => {
 
 const deleteArticles = async (articleId) => {
   try {
-    await Articles.deleteOne({ _id: articleId });
+    await Articles.destroy({ where: articleId });
   } catch (error) {
     console.log(error);
     return error;
