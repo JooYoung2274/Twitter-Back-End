@@ -40,7 +40,6 @@ const commentDelete = async (req, res, next) => {
     const { commentId } = req.params;
     const { userId } = res.locals.user;
     const comment = await commentsModel.findComment({ commentId });
-    console.log(comment);
     if (comment.userId !== userId) {
       res.sendStatus(400);
       return;
