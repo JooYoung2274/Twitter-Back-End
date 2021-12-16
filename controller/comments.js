@@ -37,14 +37,15 @@ const commentPost = async (req, res, next) => {
 
 const commentDelete = async (req, res, next) => {
   try {
-    const commentId = req.params;
-    const { nickname } = res.locals.user;
-    const comment = await commentsModel.findComment(commentId);
-    if (comment.nickname !== nickname) {
+    const { commentId } = req.params;
+    const { userId } = res.locals.user;
+    const comment = await commentsModel.findComment({ commentId });
+    console.log(comment);
+    if (comment.userId !== userId) {
       res.sendStatus(400);
       return;
     } else {
-      await commentsModel.deleteComment(commentId);
+      await commentsModel.deleteComment({ commentId });
       res.sendStatus(200);
     }
   } catch (error) {

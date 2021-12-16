@@ -12,7 +12,7 @@ const findComments = async (articleId) => {
 
 const findComment = async (commentId) => {
   try {
-    const commentData = await Comments.findOne({ where: { _id: commentId } });
+    const commentData = await Comments.findOne({ where: commentId });
     return commentData;
   } catch (error) {
     console.log(error);

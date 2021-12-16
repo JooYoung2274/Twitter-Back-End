@@ -1,17 +1,16 @@
 const express = require("express");
 const router = require("./router/index.js");
-
+const mysql = require("mysql");
 const cors = require("cors");
 const port = 3000;
 const app = express();
-// const corsOptions = {
-//   origin: "Eco_funding domain",
-//   optionsSuccessStatus: 200,
-// };
+const corsOptions = {
+  origin: "*",
+  optionsSuccessStatus: 200,
+};
 
+app.use(cors(corsOptions)); // 빈칸으로 두면 모든 요청 허용
 const { sequelize } = require("./models");
-
-app.use(cors()); // 빈칸으로 두면 모든 요청 허용
 
 app.use(express.json());
 app.use("/api", router);
