@@ -9,7 +9,7 @@ const createArticle = async (content, img, nickname, loginId, userId) => {
       loginId: loginId,
       userId: userId,
     });
-    return article;
+    return article.dataValues;
   } catch (error) {
     console.log(error);
     return error;
@@ -18,9 +18,15 @@ const createArticle = async (content, img, nickname, loginId, userId) => {
 
 const findArticles = async () => {
   try {
-    const articles = await Articles.findAll();
-    console.log(articles);
-    return articles;
+    const articles = await Articles.findAll({
+      attributes: ["content"],
+    });
+    let content_list = [];
+    for (let i = 0; i < articles.length; i++) {
+      const { content } = articles[i];
+      content_list[i] = content;
+    }
+    return content_list;
   } catch (error) {
     console.log(error);
     return error;

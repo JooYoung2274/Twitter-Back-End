@@ -12,15 +12,15 @@ const articlePost = async (req, res, next) => {
     req.files.img.forEach((v) => {
       img += "localhost" + ":3000" + "/" + v.filename + ";";
     });
-    const article = await articlesModel.createArticle(
+    const result = await articlesModel.createArticle(
       content,
       img,
       nickname,
       loginId,
       userId
     );
-
-    res.status(200).json({ article });
+    console.log(result);
+    res.status(200).json({ result });
   } catch (error) {
     console.log(error);
     next(error);
@@ -29,8 +29,8 @@ const articlePost = async (req, res, next) => {
 
 const articleGet = async (req, res, next) => {
   try {
-    const articles = await articlesModel.findArticles();
-    res.status(200).json({ result: articles });
+    const result = await articlesModel.findArticles();
+    res.status(200).json({ result });
   } catch (error) {
     console.log(error);
     next(error);
